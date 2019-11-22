@@ -1,7 +1,23 @@
-import { from } from '../../src/index';
+import { from, map, filter } from '../../src/index';
 
 console.log('reactive programming');
 
-const obs = from(fetch('https://jsonplaceholder.typicode.com/users/1'));
+const values = [1, 2, 3, 4, 5, 6];
+const $stream = from(values);
 
-obs.subscribe(v => console.log(v));
+$stream
+    // \n
+    .pipe(
+        map(v => {
+            return v * 5;
+        }),
+        filter(v => !!(v % 3))
+    )
+    .subscribe({
+        next(v) {
+            console.log(v);
+        },
+        complete() {
+            console.log('done');
+        }
+    });

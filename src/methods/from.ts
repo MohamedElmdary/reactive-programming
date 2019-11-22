@@ -5,7 +5,9 @@ function from<T>(value: Array<T> | Promise<T> | T): Observable<T> {
         if (Array.isArray(value)) {
             value.forEach(next);
             complete();
-            return nullFn; // sync observable cannot be stopped
+            return {
+                unsubscribe: nullFn
+            }; // sync observable cannot be stopped
         }
 
         if (value instanceof Promise) {
@@ -22,16 +24,20 @@ function from<T>(value: Array<T> | Promise<T> | T): Observable<T> {
                         error(err);
                     }
                 });
-            return () => {
-                // just prevent notify user because promised cannot be canceled
-                notSubscribed = false;
+            return {
+                unsubscribe: () => {
+                    // just prevent notify user because promised cannot be canceled
+                    notSubscribed = false;
+                }
             };
         }
 
         // no error can happen
         next(value);
         complete();
-        return nullFn; // sync observable cannot be stopped
+        return {
+            unsubscribe: nullFn
+        }; // sync observable cannot be stopped
     });
 }
 
