@@ -1,0 +1,17 @@
+{
+    "name": "reactive-programming",
+    "version": "1.0.0",
+    "description": "a minial build of rxjs library",
+    "scripts": {
+        "start": "parcel example/index.html"
+    },
+    "main": "index.ts",
+    "repository": "https://github.com/MohamedElmdary/reactive-programming.git",
+    "author": "MohamedElmdary <engm5081@gmail.com>",
+    "license": "MIT",
+    "private": false,
+    "devDependencies": {
+        "parcel-bundler": "^1.12.4",
+        "typescript": "^3.7.2"
+    }
+}
