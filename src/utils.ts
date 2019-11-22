@@ -1,3 +1,7 @@
-const noop = () => null;
+const nullFn = () => null;
 
-export { noop };
+function isFn(fn: any): fn is Function {
+    return typeof fn === 'function';
+}
+
+export { nullFn, isFn };

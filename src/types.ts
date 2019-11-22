@@ -1,11 +1,18 @@
+import { Observable } from './observable';
+
+type NextFn<T> = (value: T) => void;
+type VoidFn = () => void;
+
 interface Subscribe<T> {
-    next: (value: T) => void;
-    error?: (error: Error) => void;
-    complete?: () => void;
+    next: NextFn<T>;
+    error?: (error: any) => void;
+    complete?: VoidFn;
 }
 
 interface Subscription {
-    unsubscribe: () => void;
+    unsubscribe: VoidFn;
 }
 
-export { Subscribe, Subscription };
+type Operator<T> = (observable: Observable<T>) => Observable<T>;
+
+export { Subscribe, Subscription, NextFn, VoidFn, Operator };
