@@ -1,7 +1,23 @@
-import { from, map, filter } from '../../src/index';
+import { from, map, filter, fromEvent } from '../../src/index';
 
 console.log('reactive programming');
 
+const btn = document.getElementById('btn');
+
+fromEvent(btn, 'click')
+    .pipe(
+        map(v => {
+            return v.pageX;
+        }),
+        map(v => {
+            return v.toFixed(2);
+        })
+    )
+    .subscribe(v => {
+        console.log(v);
+    });
+
+/*
 const values = [1, 2, 3, 4, 5, 6];
 const $stream = from(values);
 
@@ -21,3 +37,4 @@ $stream
             console.log('done');
         }
     });
+*/

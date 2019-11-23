@@ -13,6 +13,6 @@ interface Subscription {
     unsubscribe: VoidFn;
 }
 
-type Operator<T> = (observable: Observable<T>) => Observable<T>;
+type Operator<T, R = T> = (observable: Observable<T>) => Observable<R>;
 
 export { Subscribe, Subscription, NextFn, VoidFn, Operator };

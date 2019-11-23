@@ -1,6 +1,6 @@
 import { Operator, Observable } from '../index';
 
-function map<T>(fn: (v: T) => T): Operator<T> {
+function map<T, R>(fn: (v: T) => R): Operator<T, R> {
     return observable => {
         return new Observable(({ next, error, complete }) => {
             return observable.subscribe(
