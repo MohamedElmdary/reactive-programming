@@ -1,8 +1,30 @@
-import { from, map, filter, fromEvent } from '../../src/index';
+import { from, map, filter, fromEvent, delay, take } from '../../src/index';
 
 console.log('reactive programming');
 
 from([1, 2, 3, 4])
+    .pipe(
+        // \n
+        map(v => v * 5 + 7),
+        delay(5000),
+        take(2)
+    )
+    .subscribe(v => {
+        console.log(v);
+    });
+
+fromEvent(document.getElementById('btn'), 'click')
+    .pipe(
+        map(v => {
+            return v.clientX;
+        }),
+        filter(v => v > 10)
+    )
+    .subscribe(v => {
+        console.log(v);
+    });
+
+/* from([1, 2, 3, 4])
     .pipe(
         // \n
         map(v => v * 5 + 7)
@@ -13,7 +35,7 @@ from([1, 2, 3, 4])
     })
     .catch(err => {
         console.error(err);
-    });
+    }); */
 
 /* const btn = document.getElementById('btn');
 
