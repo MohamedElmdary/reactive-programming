@@ -2,7 +2,20 @@ import { from, map, filter, fromEvent } from '../../src/index';
 
 console.log('reactive programming');
 
-const btn = document.getElementById('btn');
+from([1, 2, 3, 4])
+    .pipe(
+        // \n
+        map(v => v * 5 + 7)
+    )
+    .toPromise()
+    .then(v => {
+        console.log(v);
+    })
+    .catch(err => {
+        console.error(err);
+    });
+
+/* const btn = document.getElementById('btn');
 
 fromEvent(btn, 'click')
     .pipe(
@@ -15,7 +28,7 @@ fromEvent(btn, 'click')
     )
     .subscribe(v => {
         console.log(v);
-    });
+    }); */
 
 /*
 const values = [1, 2, 3, 4, 5, 6];

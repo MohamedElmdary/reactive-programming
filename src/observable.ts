@@ -1,4 +1,12 @@
-import { Subscribe, Subscription, NextFn, VoidFn, nullFn, isFn } from './index';
+import {
+    Subscribe,
+    Subscription,
+    NextFn,
+    VoidFn,
+    nullFn,
+    isFn,
+    take
+} from './index';
 import { Operator } from './types';
 
 class Observable<T> {
@@ -40,6 +48,12 @@ class Observable<T> {
             currentObservable = operator(currentObservable);
         });
         return currentObservable;
+    }
+
+    public toPromise(): Promise<T> {
+        return new Promise<T>((res, rej) => {
+            this.pipe(take(1)).subscribe(res, rej);
+        });
     }
 }
 
